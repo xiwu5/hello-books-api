@@ -1,10 +1,12 @@
 # app/models/author.py
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+# from app.models.book import Book
 from ..db import db
 
 class Author(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     name: Mapped[str]
+    books: Mapped[list["Book"]] = relationship(back_populates="author")
 
     def to_dict(self):
         author_as_dict = {
