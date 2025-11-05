@@ -3,7 +3,8 @@ from .db import db, migrate
 #from .routes.hello_world_routes import hello_world_bp
 from .routes.book_routes import books_bp
 from .routes.author_routes import authors_bp
-from .models import book, author # Newly added import
+from .routes.genre_routes import genres_bp
+from .models import book, author,genre # Newly added import
 import os
 
 def create_app(config=None):
@@ -29,5 +30,5 @@ def create_app(config=None):
 
     app.register_blueprint(books_bp)
     app.register_blueprint(authors_bp)
-
+    app.register_blueprint(genres_bp)
     return app
