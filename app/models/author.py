@@ -11,7 +11,8 @@ class Author(db.Model):
     def to_dict(self):
         author_as_dict = {
             "id": self.id,
-            "name": self.name
+            "name": self.name,
+            "books": [book.to_dict() for book in self.books] if self.books else []
         }
         
         return author_as_dict

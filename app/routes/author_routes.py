@@ -15,6 +15,11 @@ def create_author():
 def get_all_authors():
     return get_models_with_filters(Author, request.args)
 
+@authors_bp.get("/<author_id>")
+def get_one_author(author_id):
+    author = validate_model(Author, author_id)
+    return author.to_dict()
+
 @authors_bp.post("/<author_id>/books")
 def create_book_with_author(author_id):
     author = validate_model(Author, author_id)

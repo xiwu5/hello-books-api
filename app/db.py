@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from .models.base import Base
 
-db = SQLAlchemy(model_class=Base)
+# Use Flask-SQLAlchemy's default model class so the models register
+# with the same metadata `db.create_all()` uses during tests.
+db = SQLAlchemy()
 migrate = Migrate()

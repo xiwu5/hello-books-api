@@ -76,7 +76,8 @@ def test_create_model_author(client):
     assert status_code == 201
     assert author_data == {
         "id": 1,
-        "name": "New Author"
+        "name": "New Author",
+        "books":[]
     }
 
 def test_get_models_with_filters_one_matching_book(two_saved_books):
