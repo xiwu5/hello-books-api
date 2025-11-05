@@ -79,6 +79,8 @@ def run_migrations_online():
     and associate a connection with the context.
 
     """
+    from flask import current_app
+    print("Alembic is using DATABASE URL:", current_app.config.get('SQLALCHEMY_DATABASE_URI'))
 
     # this callback is used to prevent an auto-migration from being generated
     # when there are no changes to the schema

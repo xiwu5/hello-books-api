@@ -8,9 +8,16 @@ import os
 
 def create_app(config=None):
     app = Flask(__name__)
-    #app.register_blueprint(hello_world_bp)
+    
+    # Database configuration - prefer SQLALCHEMY_DATABASE_URI over DATABASE_URL
+    database_url = os.getenv('SQLALCHEMY_DATABASE_URI') or os.getenv('DATABASE_URL')
+    if database_url and database_url.startswith('postgres://'):
+        # Fix Render's postgres:// style URLs to work with SQLAlchemy
+        database_url = database_url.replace('postgres://', 'postgresql://', 1)
+    
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:postgres@localhost:5432/hello_books_development'
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url or \
+        'postgresql+psycopg2://postgres:postgres@localhost:5432/hello_books_development'
 
     if config:
         # Merge `config` into the app's configuration
