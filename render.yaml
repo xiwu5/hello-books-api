@@ -4,7 +4,7 @@ services:
     name: books-author-api
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: flask db upgrade && gunicorn --bind 0.0.0.0:$PORT --workers 3 "app:create_app()"
+    startCommand: flask db upgrade && gunicorn "app:create_app()"
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
